@@ -1,3 +1,4 @@
+"use client"
 import emailjs from "emailjs-com";
 import { Button, Textarea, Portal } from "@chakra-ui/react";
 import { useState } from "react";

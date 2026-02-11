@@ -54,24 +54,24 @@ const pillars = [
       "Each blend undergoes multi-stage testing, stability checks, and independent lab validation for safety.",
     icon: "microscope",
   },
-  {
-    title: "End-to-end digital care",
-    description:
-      "Condition dashboards, habit trackers, and progress insights make tracking remissions effortless.",
-    icon: "mobile",
-  },
-  {
-    title: "Best In Class Ingredientz",
-    description:
-      "Top Quality Sourced, Pestcides Screening, Heavy Meatel Testing, Microbial Analysis ",
-    icon: "leaf",
-  },
-  {
-    title: "Exercise Regimen",
-    description:
-      "Right Combination Of Endurance Aerobic, Strength, HIT, Yoga, Pranayam.  ",
-    icon: "userCheck",
-  },
+  // {
+  //   title: "End-to-end digital care",
+  //   description:
+  //     "Condition dashboards, habit trackers, and progress insights make tracking remissions effortless.",
+  //   icon: "mobile",
+  // },
+  // {
+  //   title: "Best In Class Ingredientz",
+  //   description:
+  //     "Top Quality Sourced, Pestcides Screening, Heavy Meatel Testing, Microbial Analysis ",
+  //   icon: "leaf",
+  // },
+  // {
+  //   title: "Exercise Regimen",
+  //   description:
+  //     "Right Combination Of Endurance Aerobic, Strength, HIT, Yoga, Pranayam.  ",
+  //   icon: "userCheck",
+  // },
   
 ];
 
@@ -79,7 +79,7 @@ const pillars = [
 
 export default function ValuePropositions() {
   return (
-    <Box bg="white" py={{ base: 16, md: 24 }}>
+    <Box bg="#f3e6d8" py={{ base: 16, md: 24 }}>
       {/* SECTION TITLE */}
       <Stack
         spacing={6}
@@ -119,7 +119,8 @@ export default function ValuePropositions() {
             <Box
               key={pillar.title}
               w="360px"
-              bg="#026aa2"
+             bgGradient="linear(to-r,  #008f7c, #54909d)"
+        
               border="1px solid white"
               boxShadow="2xl"
               px={8}

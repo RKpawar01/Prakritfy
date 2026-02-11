@@ -45,160 +45,198 @@ const socials = [
 
 export default function Footer() {
   return (
-    <Box as="footer" bg="deepGreen" color="white" mt={20} pt={16}>
-      <Flex
-        maxW="1200px"
-        mx="auto"
-        px={{ base: 4, md: 8 }}
-        direction="column"
-        gap={12}
-      >
-        <SimpleGrid columns={{ base: 1, md: 4 }} spacing={12}>
-          {/* Brand */}
-          <Box>
-            <Flex align="center" gap={3} mb={6}>
-              <Box
-                bg="#6da95c"
-                color="white"
-                rounded="full"
-                px={3}
-                py={1}
-                fontWeight="700"
-                letterSpacing="widest"
-                fontSize="sm"
-              >
-                PR
-              </Box>
-              <Heading size="md">Prakritify</Heading>
-            </Flex>
+    <Box as="footer" position="relative"  color="white">
+      {/* TOP GLOW DIVIDER */}
+      <Box
+        position="absolute"
+        top={0}
+        left={0}
+        right={0}
+        h="2px"
+        bgGradient="linear(to-r, transparent, #7CBF9E, transparent)"
+      />
 
-            <Text color="whiteAlpha.800" mb={4}>
-              Elevating ancient Ayurvedic wisdom with modern research to craft
-              high-efficacy herbal solutions tailored for today&apos;s
-              lifestyles.
-            </Text>
-
-            <Flex gap={3}>
-              {socials.map((social) => (
-                <Button
-                  key={social.label}
-                  as="a"
-                  href={social.href}
-                  aria-label={social.label}
-                  size="sm"
-                  rounded="full"
-                  variant="ghost"
-                  color="whiteAlpha.900"
-                  _hover={{ bg: "whiteAlpha.200" }}
+      {/* BACKGROUND */}
+      <Box bgGradient="linear(to-b, #0F3D2E, #081F1A)">
+        <Flex
+          maxW="1200px"
+          mx="auto"
+          px={{ base: 5, md: 10 }}
+          pt={{ base: 18, md: 28 }}
+          direction="column"
+          gap={20}
+        >
+          {/* MAIN GRID */}
+          <SimpleGrid columns={{ base: 1, md: 4 }} spacing={14}>
+            {/* BRAND */}
+            <Stack spacing={6}>
+              <Flex align="center" gap={3}>
+                <Box
+                  bgGradient="linear(to-br, #7CBF9E, #548F9D)"
+                  rounded="xl"
+                  px={3}
+                  py={1.5}
+                  fontWeight="800"
+                  letterSpacing="widest"
+                  fontSize="sm"
+                  boxShadow="0 10px 30px rgba(124,191,158,0.4)"
                 >
-                  {social.icon}
-                </Button>
-              ))}
-            </Flex>
-          </Box>
+                  PR
+                </Box>
+                <Heading size="md" letterSpacing="tight">
+                  Prakritify
+                </Heading>
+              </Flex>
 
-          {/* Footer Links */}
-          {footerLinks.map((section) => (
-            <Box key={section.title}>
-              <Heading size="sm" textTransform="uppercase" mb={4}>
-                {section.title}
-              </Heading>
-              <Stack spacing={3}>
-                {section.items.map((item) => (
-                  <Link
-                    key={item.label}
-                    as={NextLink}
-                    href={item.to}
-                    color="whiteAlpha.800"
-                    _hover={{ color: "#e2aa6f" }}
+              <Text color="whiteAlpha.800" fontSize="sm" lineHeight="1.8">
+                Elevating ancient Ayurvedic wisdom with modern research to craft
+                high-efficacy herbal solutions tailored for today’s conscious
+                lifestyles.
+              </Text>
+
+              {/* SOCIALS */}
+              <Flex gap={4}>
+                {socials.map((social) => (
+                  <Button
+                    key={social.label}
+                    as="a"
+                    href={social.href}
+                    aria-label={social.label}
+                    size="sm"
+                    rounded="full"
+                    bg="whiteAlpha.100"
+                    color="white"
+                    backdropFilter="blur(6px)"
+                    _hover={{
+                      bg: "#7CBF9E",
+                      color: "#0F3D2E",
+                      transform: "translateY(-3px)",
+                      boxShadow: "0 10px 25px rgba(124,191,158,0.6)",
+                    }}
                   >
-                    {item.label}
-                  </Link>
+                    {social.icon}
+                  </Button>
                 ))}
+              </Flex>
+            </Stack>
+
+            {/* LINKS */}
+            {footerLinks.map((section) => (
+              <Box key={section.title}>
+                <Heading
+                  size="xs"
+                  textTransform="uppercase"
+                  letterSpacing="widest"
+                  mb={6}
+                  color="whiteAlpha.900"
+                >
+                  {section.title}
+                </Heading>
+
+                <Stack spacing={3}>
+                  {section.items.map((item) => (
+                    <Link
+                      key={item.label}
+                      as={NextLink}
+                      href={item.to}
+                      fontSize="sm"
+                      color="whiteAlpha.700"
+                      _hover={{
+                        color: "#7CBF9E",
+                        transform: "translateX(4px)",
+                      }}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </Stack>
+              </Box>
+            ))}
+
+            {/* NEWSLETTER */}
+            <Box
+              bg="rgba(255,255,255,0.06)"
+              backdropFilter="blur(14px)"
+              rounded="2xl"
+              p={6}
+              boxShadow="0 20px 50px rgba(0,0,0,0.25)"
+            >
+              <Heading
+                size="xs"
+                textTransform="uppercase"
+                letterSpacing="widest"
+                mb={4}
+              >
+                Stay in the know
+              </Heading>
+
+              <Text color="whiteAlpha.800" fontSize="sm" mb={6}>
+                Ayurvedic insights, seasonal rituals & exclusive offers —
+                delivered weekly.
+              </Text>
+
+              <Stack spacing={4}>
+                <Input
+                  type="tel"
+                  placeholder="Enter your number"
+                  rounded="full"
+                  bg="white"
+                  color="black"
+                  fontSize="sm"
+                  _placeholder={{ color: "gray.500" }}
+                  _focus={{
+                    boxShadow: "0 0 0 2px rgba(124,191,158,0.6)",
+                  }}
+                />
+
+                <Button
+                  rounded="full"
+                  bgGradient="linear(to-r, #7CBF9E, #548F9D)"
+                  color="#0F3D2E"
+                  fontWeight="700"
+                  letterSpacing="wide"
+                  _hover={{
+                    transform: "translateY(-2px)",
+                    boxShadow: "0 15px 40px rgba(124,191,158,0.6)",
+                  }}
+                >
+                  BOOK
+                </Button>
               </Stack>
             </Box>
-          ))}
+          </SimpleGrid>
 
-          {/* Newsletter */}
-          <Box>
-            <Heading size="sm" textTransform="uppercase" mb={4}>
-              Stay in the know
-            </Heading>
-            <Text color="whiteAlpha.800" mb={6}>
-              Ayurvedic wellness tips, seasonal rituals, and limited product
-              drops, delivered weekly.
+          <Divider borderColor="whiteAlpha.200" />
+
+          {/* BOTTOM BAR */}
+          <Flex
+            direction={{ base: "column", md: "row" }}
+            justify="space-between"
+            align={{ base: "flex-start", md: "center" }}
+            gap={4}
+            pb={12}
+            fontSize="sm"
+            color="whiteAlpha.700"
+          >
+            <Text>
+              © {new Date().getFullYear()} Prakritify Ayurveda. All rights
+              reserved.
             </Text>
-            <Stack spacing={4}>
-              <input
-                type="tel"
-                name="phone"
-                
-                placeholder="Enter Your Number"
-                required
-                inputMode="numeric"
-                pattern="[0-9]*"
-                maxLength={10}
-                style={{
-                  height:30,
-                  padding:15,
-                  color: "black",
-                  caretColor: "black",
-                  background:"white"
-                }}
-                className="w-full py-2 text-black outline-none rounded-full"
-                onInput={(e) => {
-                  e.target.value = e.target.value.replace(/[^0-9]/g, "");
-                }}
-              />
-              <Button rounded="full" bg="#af8355" _hover={{ bg: "#e2aa6f" }}>
-                BOOK
-              </Button>
+
+            <Stack direction={{ base: "column", md: "row" }} spacing={6}>
+              <Link as={NextLink} href="/contact#privacy" _hover={{ color: "#7CBF9E" }}>
+                Privacy Policy
+              </Link>
+              <Link as={NextLink} href="/contact#terms" _hover={{ color: "#7CBF9E" }}>
+                Terms of Service
+              </Link>
+              <Link as={NextLink} href="/contact#faq" _hover={{ color: "#7CBF9E" }}>
+                FAQ
+              </Link>
             </Stack>
-          </Box>
-        </SimpleGrid>
-
-        <Divider borderColor="whiteAlpha.200" />
-
-        {/* Bottom Bar */}
-        <Flex
-          direction={{ base: "column", md: "row" }}
-          justify="space-between"
-          align={{ base: "flex-start", md: "center" }}
-          gap={4}
-          pb={8}
-          fontSize="sm"
-          color="whiteAlpha.700"
-        >
-          <Text color="#5a4237">
-            © {new Date().getFullYear()} Prakritify Ayurveda. All rights
-            reserved.
-          </Text>
-
-          <Stack direction={{ base: "column", md: "row" }} spacing={4}>
-            <Link
-              as={NextLink}
-              href="/contact#privacy"
-              _hover={{ color: "#e2aa6f" }}
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              as={NextLink}
-              href="/contact#terms"
-              _hover={{ color: "#e2aa6f" }}
-            >
-              Terms of Service
-            </Link>
-            <Link
-              as={NextLink}
-              href="/contact#faq"
-              _hover={{ color: "#e2aa6f" }}
-            >
-              FAQ
-            </Link>
-          </Stack>
+          </Flex>
         </Flex>
-      </Flex>
+      </Box>
     </Box>
   );
 }

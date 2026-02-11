@@ -11,7 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import { FiDroplet, FiHeart, FiTrendingUp } from "react-icons/fi";
+import { FiHeart } from "react-icons/fi";
 
 import AnimatedImage from "@/components/home/AnimatedImage";
 import ValuePropositions from "@/components/home/ValuePropositions";
@@ -23,181 +23,153 @@ import CallToAction from "@/components/home/CallToAction";
 import VideosSection from "@/components/home/VideosSection";
 import Form from "@/components/home/Form";
 
-// Motion wrapper
 const MotionBox = motion(Box);
-
-// SAFE data
-const highlights = [
-  { icon: "heart", title: "Root Cause Analysis" },
-  { icon: "trend", title: "Clinical Research Validation" },
-  { icon: "droplet", title: "Software Driven  Management" },
-];
-
-// Icon map
-const iconMap = {
-  heart: FiHeart,
-  trend: FiTrendingUp,
-  droplet: FiDroplet,
-};
 
 export default function Tree_section() {
   return (
-    <div>
+    <Box position="relative" overflow="hidden">
+      {/* ================= HERO ================= */}
       <Box
-        bgGradient="linear(to-br, deepRed, brand.700)"
-        color="white"
-        pt={{ base: 16, md: 28 }}
-        pb={{ base: 20, md: 28 }}
         position="relative"
-        overflow="hidden"
+        minH={{ base: "100svh", md: "100vh" }}
+        color="white"
+        pt={{ base: 20, md: 28 }}
+        pb={{ base: 20, md: 32 }}
       >
-        {/* Background glow */}
+        {/* Background Image */}
         <Box
           position="absolute"
           inset="0"
-          bgImage="radial-gradient(circle at top right, rgba(226, 170, 111, 0.35), transparent 45%)"
+          bgImage="url('/Wallpaper2.webp')"
+
+          bgSize="cover"
+          bgPosition="center"
+          bgRepeat="no-repeat"
+          filter="contrast(1.05) saturate(1.05)"
+          transform="scale(1.05)"
+          zIndex={0}
         />
 
-        {/* Animated container */}
+        {/* Soft vignette */}
+        <Box
+          position="absolute"
+          inset="0"
+          bgGradient="radial-gradient(circle at center, rgba(0,0,0,0.05), rgba(0,0,0,0.35))"
+          zIndex={1}
+        />
+
+        {/* Light brand tint */}
+        <Box
+          position="absolute"
+          inset="0"
+          bg="rgba(0,142,124,0.22)"
+          zIndex={2}
+        />
+
+        {/* Content */}
         <MotionBox
           position="relative"
+          zIndex={3}
           maxW="1200px"
           mx="auto"
-          px={{ base: 4, md: 8 }}
-          initial={{ y: 80, opacity: 0 }}
+          px={{ base: 5, md: 8 }}
+          initial={{ y: 60, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <SimpleGrid
             columns={{ base: 1, md: 2 }}
-            spacing={{ base: 12, md: 16 }}
+            spacing={{ base: 12, md: 20 }}
+            alignItems="center"
           >
-            {/* LEFT CONTENT */}
-            <Stack spacing={8} maxW="520px" mx={{ base: "auto", md: "0" }}>
+            {/* LEFT */}
+            <Stack spacing={8}>
               <Heading
-                fontSize={{ base: "2.4rem", md: "3.4rem" }}
-                lineHeight="1.1"
+                fontSize={{ base: "2.1rem", md: "3.6rem" }}
+                lineHeight="1.15"
+                fontWeight="700"
+                letterSpacing="-0.02em"
+                textShadow="0 6px 20px rgba(0,0,0,0.45)"
                 textAlign={{ base: "center", md: "left" }}
               >
-                Chronic Disease Management Through Functional Medicine
+                Chronic Disease Management <br />
+                <Text
+                  as="span"
+                  bgGradient="linear(to-r, #E6FFF8, #B9FFF1)"
+                  bgClip="text"
+                  fontWeight="800"
+                >
+                  Through Lifestyle, Diet & Herbs
+                </Text>
               </Heading>
 
-              {/* Text block (color preserved) */}
-              <Stack spacing={1} textAlign="center">
-                <Text
-                  fontWeight="bold"
-                  fontSize={{ base: "2xl", md: "2xl" }}
-                  color="whiteAlpha.800"
-                >
-                  INTEGRATING
-                </Text>
+              <Text
+                fontSize={{ base: "lg", md: "xl" }}
+                color="whiteAlpha.900"
+                maxW="520px"
+                textShadow="0 4px 12px rgba(0,0,0,0.4)"
+                textAlign={{ base: "center", md: "left" }}
+              >
+                Model Diagnostics · Ayurvedic & Herbal Treatment
+              </Text>
 
-                <Text
-                  fontWeight="bold"
-                  fontSize={{ base: "md", md: "lg" }}
-                  color="whiteAlpha.800"
-                >
-                  Ancient wisdom · Modern science · Nutrition
-                </Text>
-
-                <Text
-                  fontWeight="bold"
-                  fontSize={{ base: "md", md: "lg" }}
-                  color="whiteAlpha.800"
-                >
-                  Lifestyle Approch · Herbal Medication
-                </Text>
-              </Stack>
-
-              {/* CTA */}
-              <HStack spacing={4} justify="center" flexWrap="wrap">
+              <HStack justify={{ base: "center", md: "flex-start" }}>
                 <Button
                   size="lg"
-                  bg="#026aa2"
-                  color="black"
+                  px={12}
                   rounded="full"
-                  _hover={{ bg: "#afd4e6" }}
+                  bg="linear-gradient(135deg, #E6FFF8, #A7F3E8)"
+                  color="#064E3B"
+                  fontWeight="600"
+                  boxShadow="0 20px 60px rgba(0,0,0,0.4)"
+                  _hover={{
+                    transform: "translateY(-2px)",
+                    boxShadow: "0 30px 80px rgba(0,0,0,0.55)",
+                  }}
                 >
-                  Book Now
+                  Book Consultation
                 </Button>
               </HStack>
 
-              {/* Highlights */}
-              <Stack
-                spacing={4}
-                direction={{ base: "column", md: "row" }}
-                align={{ base: "center", md: "flex-start" }}
+              <HStack
+                spacing={3}
+                px={6}
+                py={4}
+                rounded="2xl"
+                backdropFilter="blur(14px)"
+                bg="rgba(255,255,255,0.18)"
+                border="1px solid rgba(255,255,255,0.3)"
+                maxW="fit-content"
+                mx={{ base: "auto", md: "0" }}
               >
-                {highlights.map((item) => {
-                  const IconComponent =
-                    iconMap[item.icon as keyof typeof iconMap];
-
-                  return (
-                    <HStack
-                      key={item.title}
-                      spacing={3}
-                      bg="whiteAlpha.100"
-                      px={4}
-                      py={3}
-                      rounded="xl"
-                      w={{ base: "100%", sm: "80%", md: "150px" }}
-                      justify={{ base: "center", md: "flex-start" }}
-                    >
-                      <Icon as={IconComponent} boxSize={5} color="red" />
-                      <Text fontWeight="500" color="white">
-                        {item.title}
-                      </Text>
-                    </HStack>
-                  );
-                })}
-              </Stack>
+                <Icon as={FiHeart} boxSize={5} color="#B9FFF1" />
+                <Text fontSize="sm" fontWeight="500">
+                  Ancient Wisdom · Modern Diagnostics
+                </Text>
+              </HStack>
             </Stack>
 
             {/* RIGHT IMAGE */}
-            <Box position="relative" w="100%" maxW="500px" mx="auto">
-              {/* Blur glow */}
-              <Box
-                position="absolute"
-                inset="0"
-                rounded="3xl"
-                bg="whiteAlpha.200"
-                filter="blur(60px)"
-              />
 
-              <AnimatedImage />
-
-              {/* WhatsApp floating */}
-              <a
-                href="https://wa.me/9911024406"
-                target="_blank"
-                className="group fixed top-4 right-4 md:top-6 md:right-6 z-50"
-              >
-                <span className="absolute right-16 top-1/2 -translate-y-1/2 scale-0 rounded bg-black px-3 py-1 text-sm text-white transition-all group-hover:scale-100">
-                  Chat on WhatsApp
-                </span>
-
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg hover:scale-110 transition">
-                  <img
-                    src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-                    className="h-8 w-8"
-                    alt="WhatsApp"
-                  />
-                </div>
-              </a>
-            </Box>
           </SimpleGrid>
         </MotionBox>
-
-        <Form />
       </Box>
 
-      <ValuePropositions />
-      <OurStory />
+      {/* ================= FLOATING FORM ================= */}
+
+      <Form />
+
+      {/* ================= REST OF SITE ================= */}
       <Categories />
+      <ValuePropositions />
+
       <Testimonials />
-      <VideosSection />
-      <BlogHighlights />
       <CallToAction />
-    </div>
+
+      {/* Optional sections */}
+      {/* <OurStory /> */}
+      {/* <VideosSection /> */}
+      {/* <BlogHighlights /> */}
+    </Box>
   );
 }

@@ -9,7 +9,7 @@ import Team from "./Team";
 
 const page = () => {
   return (
-    <div className="bg-gradient-to-r from-[#52b5eb] to-[#026967]">
+    <div className="bg-gradient-to-r from-[#273f22] to-[#646c3f]   ">
       
       <div className="absolute text-white w-full z-10">
         <NavbarDemo />
@@ -47,16 +47,14 @@ const page = () => {
         </div>
       </div>
 
-      {/* <Foundation />
-      <Third />
+      <Foundation />
+      {/* <Third />
       <PersonalStory />
       <Standby />
       <Name />
       <Team /> */}
 
-      <div className="bg-gradient-to-r from-[#52b5eb] to-[#026967]">
-        <Footer />
-      </div>
+       <Footer />
     </div>
   );
 };

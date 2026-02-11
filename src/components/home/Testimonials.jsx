@@ -43,14 +43,14 @@ function Testimonials() {
             textTransform="uppercase"
             fontSize="sm"
             letterSpacing="widest"
-            color="#3c6232"
+            color="#00796a"
           >
             Results that speak
           </Text>
-          <Heading color="#263d21" fontSize={{ base: "2.2rem", md: "2.6rem" }}>
+          <Heading color="#00796a" fontSize={{ base: "2.2rem", md: "2.6rem" }}>
             93% of members report improved energy, sleep, and digestion within 45 days.
           </Heading>
-          <Text color="#745849">
+          <Text color="#4e8c98">
             We combine precise formulations, daily rituals, and compassionate coaching to
             transform your health markers and how you feel in your body.
           </Text>
@@ -60,7 +60,7 @@ function Testimonials() {
           {testimonials.map((item) => (
             <Stack
               key={item.name}
-              bg="#f5f8f3"
+              bg="#008573"
               px={8}
               py={10}
               rounded="2xl"
@@ -78,7 +78,7 @@ function Testimonials() {
                 top={-5}
                 left={8}
               />
-              <Text fontSize="lg" color="#5a4237">
+              <Text fontSize="lg" color="#fff">
                 “{item.quote}”
               </Text>
               <HStack spacing={4} pt={4}>

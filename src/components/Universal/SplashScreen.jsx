@@ -11,11 +11,13 @@ export default function SplashScreen({ onFinish }) {
   }, [onFinish]);
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-r from-[#026aa2] to-[#35b6b4]">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-r from-[#2F5F55] to-[#71D2BA]  
+      
+    ">
       <img
-        src="/Final.png"
+        src="/FinalLogo.png"
         alt="Splash"
-        className="w-1/3 h-1/3 rounded-full object-cover animate-splash ring-4 ring-white shadow-[0_0_40px_rgba(255,255,255,0.7)]"
+        className=" h-1/3  w-1/3  animate-splash  "
       />
     </div>
   );

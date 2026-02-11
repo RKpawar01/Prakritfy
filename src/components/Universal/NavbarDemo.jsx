@@ -47,7 +47,7 @@ export function NavbarDemo() {
             items={navItems}
             className="text-white font-bold text-lg"
           />
-          <NavbarButton onClick={book} variant="primary">
+          <NavbarButton className="text-white" onClick={book} variant="primary">
             Book a call
           </NavbarButton>
         </NavBody>
@@ -65,12 +65,13 @@ export function NavbarDemo() {
           <MobileNavMenu
           
               
-  className="bg-gradient-to-r from-[#026aa2] to-[#35b6b4] "
+  className="bg-[#71d2ba]/50 "
+        
             isOpen={isMobileMenuOpen} 
             onClose={() => setIsMobileMenuOpen(false)}
           >
             {navItems.map((item, idx) => (
-              <div className="text-black hover:underline hover:text-white w-30">
+              <div className="text-black text-center rounded-4xl hover:font-bold transition-transform duration-300 hover:scale-105  hover:bg-white  w-30">
                 <a
                 key={idx}
                 href={item.link}
@@ -120,7 +121,7 @@ export function NavbarDemo() {
         {/* Close Button */}
         <button
           onClick={() => setOpen(false)}
-          className="absolute top-3 right-4 text-xl"
+          className="absolute top-3 right-4 text-xl "
         >
           ✕
         </button>

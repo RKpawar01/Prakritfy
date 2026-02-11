@@ -1,29 +1,19 @@
 "use client";
-
-import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-
-export default function ProductSearch({ products = [], onSearch }) {
+export default function ProductSearch({ onSearch }) {
   return (
-    <Box sx={{ width: 300 }}>
-      <Autocomplete
-        freeSolo
-        disableClearable
-        options={products.map((p) => p.name)}
-        onInputChange={(_, value) => onSearch?.(value)}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Search products"
-            size="small"
-            InputProps={{
-              ...params.InputProps,
-              type: "search",
-            }}
-          />
-        )}
+    <div className="relative w-[300px] grid grid-cols-2">
+      {/* Search Icon */}
+      
+
+      {/* Input */}
+      <input
+        type="search"
+        placeholder="   Search products"
+        onChange={(e) => onSearch(e.target.value)}
+        className="w-full border ring-2 ring-[#04a2f7] rounded rounded-4xl gap-10 pr-3 py-2 text-sm 
+                   focus:outline-none focus:ring-2 focus:ring-[#025582]"
       />
-    </Box>
+
+    </div>
   );
 }

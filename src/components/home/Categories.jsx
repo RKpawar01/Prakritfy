@@ -10,112 +10,159 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 
-
-
 const productCategories = [
   {
-    img: "https://d3upjtc0wh66ez.cloudfront.net/wp-content/uploads/2024/09/diabetes-symptoms-and-treatment.jpg",
+    img: "Diabetes.jpg",
     title: "Diabetes",
     description:
       "Balance blood sugar, enhance insulin sensitivity, and protect pancreatic function with targeted botanicals.",
-  },
-  {
-    img: "https://images.squarespace-cdn.com/content/v1/5c319e0d25bf02353683db93/1569122403100-ZAIVQ0YC8E702MOUQJG1/shutterstock_1035434050-1-e1532966569521.jpg",
-    title: "PCOS",
-    description:
-      "Regulate cycles, support hormonal harmony, and reduce inflammation with clinically-backed Ayurvedic blends.",
-  },
-  {
-    img: "https://medlineplus.gov/images/LiverDisease_share.jpg",
-    title: "Liver",
-    description:
-      "Detoxify, regenerate, and elevate liver performance with antioxidant-rich herbs and nutraceuticals.",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=900&q=80",
-    title: "Blood Pressure",
-    description:
-      "Stabilize blood pressure, improve circulation, and ease stress responses with adaptogenic formulations.",
-  },
-  {
-    img: "https://english-blog.s3.amazonaws.com/uploads/2020/02/Home-Health-Care-The-New-Trend-In-India.jpg",
-    title: "Heart Health",
-    description:
-      "Strengthen cardiac function, optimize lipids, and protect vascular integrity with cardiotonic herbs.",
-  },
-  {
-    img: "https://www.lalpathlabs.com/blog/wp-content/uploads/2018/01/Lipid.jpg",
-    title: "Lipids",
-    description:
-      "Manage cholesterol, reduce triglycerides, and boost metabolic resilience through evidence-led botanicals.",
-  },
+    },
+    {
+      img: "Lipids.avif",
+      title: "Lipids",
+      description:
+        "Manage cholesterol, reduce triglycerides, and boost metabolic resilience through evidence-led botanicals.",
+      },
+      {
+        img: "Blood_Pressure.jpg",
+        title: "Blood Pressure",
+        description:
+          "Stabilize blood pressure, improve circulation, and ease stress responses with adaptogenic formulations.",
+        },
+        {
+          img: "Heart.jpg",
+          title: "Heart Health",
+          description:
+            "Strengthen cardiac function, optimize lipids, and protect vascular integrity with cardiotonic herbs.",
+        },
+        {
+          img: "Arthritis.avif",
+          title: "Arthritis",
+          description:
+          "Relieve joint stiffness, support mobility, and promote long-term joint resilience with evidence-led botanicals.",
+        },
+        {
+          img: "Liver.jpg",
+          title: "Liver",
+          description:
+          "Detoxify, regenerate, and elevate liver performance with antioxidant-rich herbs and nutraceuticals.",
+        },
+        {
+          img: "PCOS.webp",
+          title: "PCOS",
+          description:
+            "Regulate cycles, support hormonal harmony, and reduce inflammation with clinically-backed Ayurvedic blends.",
+        },
 ];
 
 function Categories() {
   const router = useRouter();
+
   return (
-    <Box px="20px" py={{ base: 16, md: 20 }}>
-      <Box maxW="1200px" mx="auto" px={{ base: 4, md: 8 }}>
-        <Stack spacing={4} textAlign="center" mb={12}>
+    <Box
+      px={{ base: 4, md: 10 }}
+      py={{ base: 16, md: 24 }}
+      bgGradient="linear(to-b, #F8F6F2, #EEF5F3)"
+    >
+      <Box maxW="1200px" mx="auto">
+        {/* Header */}
+        <Stack spacing={4} textAlign="center" mb={16}>
           <Text
             textTransform="uppercase"
             fontSize="sm"
             letterSpacing="widest"
-            color="#fff"
+            color="#028f7d"
+            fontWeight="600"
           >
             Conditions we specialise in
           </Text>
-          <Heading color="#000" fontSize={{ base: "2rem", md: "2.6rem" }}>
-            Doctor-designed disease programmes backed by potent herbology.
+
+          <Heading
+            color="#0F2F2A"
+            fontSize={{ base: "2rem", md: "2.6rem" }}
+            fontWeight="700"
+            lineHeight="1.2"
+          >
+            Doctor-designed disease programmes <br />
+            backed by potent herbology
           </Heading>
-          <Text maxW="620px" mx="auto" color="#fff">
+
+          <Text
+            maxW="620px"
+            mx="auto"
+            color="#4A6F6A"
+            fontSize="lg"
+          >
             Every condition is supported by clinically validated herbal stacks,
-            nutrition roadmaps, and coaching to address underlying dysfunction.
+            nutrition roadmaps, and lifestyle coaching to address root causes.
           </Text>
         </Stack>
 
-        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
+        {/* Cards */}
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
           {productCategories.map((item) => (
             <Stack
               key={item.title}
-              bg="black"
-              border="1px solid"
-              borderColor="black"
-              rounded="2xl"
+              bg="white"
+              rounded="3xl"
               overflow="hidden"
-              boxShadow="2xl"
-              spacing={0}
-              transition="transform 0.3s ease"
-              _hover={{ transform: "translateY(-8px)" }}
+              boxShadow="0 20px 50px rgba(0,0,0,0.08)"
+              transition="all 0.35s ease"
+              _hover={{
+                transform: "translateY(-10px)",
+                boxShadow: "0 35px 80px rgba(0,0,0,0.12)",
+              }}
             >
-              <Image
-                src={item.img}
-                alt={item.title}
-                h="220px"
-                w="full"
-                objectFit="cover"
-              />
+              {/* Image */}
+              <Box position="relative" h="220px">
+                <Image
+                  src={item.img}
+                  alt={item.title}
+                  h="100%"
+                  w="100%"
+                  objectFit="cover"
+                />
+                {/* subtle image overlay */}
+                <Box
+                  position="absolute"
+                  inset="0"
+                  bgGradient="linear(to-t, rgba(0,0,0,0.45), transparent)"
+                />
+              </Box>
+
+              {/* Content */}
               <Stack spacing={4} p={6}>
                 <Tag
                   alignSelf="flex-start"
-                  bg="#f5f8f3"
-                  color="#0aa4eb"
+                  bg="#E6F4F1"
+                  color="#028f7d"
                   rounded="full"
-                  px={3}
+                  px={4}
                   py={1}
+                  fontWeight="600"
                 >
                   {item.title}
                 </Tag>
-                <Text color="#9facd0">{item.description}</Text>
-               <Button onClick={() => router.push("/contact")}
+
+                <Text color="#4A6F6A" fontSize="md">
+                  {item.description}
+                </Text>
+
+                <Button
+                  onClick={() => router.push("/contact")}
                   rounded="full"
+                  bg="#028f7d"
                   color="white"
-                  bg="#0aa4eb"
-                  fontSize="lg"
                   size="sm"
+                  fontWeight="600"
                   alignSelf="flex-start"
+                  px={6}
+                  _hover={{
+                    bg: "#027468",
+                    transform: "translateY(-1px)",
+                  }}
                 >
-                 Book Free Consultation
+                  Book Free Consultation
                 </Button>
               </Stack>
             </Stack>

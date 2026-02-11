@@ -11,12 +11,13 @@ export default function AnimatedImage() {
       transition={{ duration: 0.9, ease: "easeOut" }}
     >
       <Image
-        src="https://www.blkmaxhospital.com/img/doctor-consult-illustration.svg"
+        // src="/Front.png"
         alt="Herbal disease-care rituals"
         w="full"
         maxW={{ base: "100%", md: "100%" }}
         mx="screen"
         position="relative"
+        rounded="xl"
       />
     </motion.div>
   );
