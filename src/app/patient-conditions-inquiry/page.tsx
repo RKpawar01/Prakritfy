@@ -313,10 +313,6 @@ export default function EmeraldPremiumHealthForm() {
     if (!form.name.trim()) return showToast("Full name is required.", "warn");
     if (!form.phone.trim())
       return showToast("Phone number is required.", "warn");
-    if (!form.age) return showToast("Age is required.", "warn");
-    if (!form.gender) return showToast("Please select a gender.", "warn");
-    if (!form.weight.trim()) return showToast("Weight is required.", "warn");
-
     setIsSubmitting(true);
 
     try {
@@ -406,13 +402,13 @@ export default function EmeraldPremiumHealthForm() {
 
       const payload = {
         phoneNumber: form.phone.trim(),
-        email: form.email.trim(),
         name: form.name.trim(),
+        ...(form.email.trim() && { email: form.email.trim() }),
         selectedConditions: form.diseases,
         responses: {
-          gender: form.gender.toLowerCase(),
-          age: Number(form.age),
-          weightKg: parseFloat(form.weight),
+          ...(form.gender && { gender: form.gender.toLowerCase() }),
+          ...(form.age && { age: Number(form.age) }),
+          ...(form.weight && { weightKg: parseFloat(form.weight) }),
           ...(Number.isFinite(heightNum) ? { heightCm: heightNum } : {}),
           ...(form.diseases.length > 0 ? { conditions } : {}),
         },
@@ -502,17 +498,17 @@ export default function EmeraldPremiumHealthForm() {
           animate={{ opacity: 1, y: 0 }}
           className="sticky top-6 z-40 mb-8 hidden md:flex justify-center"
         >
-          <div className="bg-white/10 backdrop-blur-2xl rounded-full shadow-2xl border border-white/20 p-1.5 flex gap-1">
+          <div className="bg-white/10 backdrop-blur-2xl rounded-full shadow-2xl border border-white/20 p-1.5 flex gap-3">
             {[
               {
                 id: "conditions",
                 label: "Conditions",
-                icon: <Activity className="w-4 h-4" />,
+                icon: <Activity className="w-8 h-4 pr-5 m-3" />,
               },
               {
                 id: "personal",
                 label: "Personal Info",
-                icon: <User className="w-4 h-4" />,
+                icon: <User className="w-8 h-4 pr-5 m-3" />,
               },
             ].map((section) => (
               <button
@@ -773,7 +769,7 @@ export default function EmeraldPremiumHealthForm() {
                                     className="w-full p-3 pr-10 bg-white border border-white/20 rounded-xl text-white placeholder-white/40 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all appearance-none"
                                   >
                                     <option value="" className="bg-white">
-                                          Select option
+                                      Select option
                                     </option>
                                     {q.options?.map((opt: string) => (
                                       <option
@@ -883,7 +879,7 @@ export default function EmeraldPremiumHealthForm() {
                   {/* Age */}
                   <div className="space-y-2 group">
                     <label className="text-sm font-semibold text-white/70 ml-1">
-                      Age <span className="text-emerald-400">*</span>
+                      Age
                     </label>
                     <input
                       type="number"
@@ -891,7 +887,6 @@ export default function EmeraldPremiumHealthForm() {
                       value={form.age}
                       onChange={handleChange}
                       placeholder="   Enter your age"
-                      required
                       min={1}
                       max={120}
                       className="w-full p-3.5 bg-white border border-white/20 rounded-xl text-white placeholder-white focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all group-hover:border-white"
@@ -930,7 +925,7 @@ export default function EmeraldPremiumHealthForm() {
                   {/* Weight */}
                   <div className="space-y-2 group">
                     <label className="text-sm font-semibold text-white/70 ml-1">
-                      Weight (kg) <span className="text-emerald-400">*</span>
+                      Weight (kg)
                     </label>
                     <input
                       type="number"
@@ -938,7 +933,6 @@ export default function EmeraldPremiumHealthForm() {
                       value={form.weight}
                       onChange={handleChange}
                       placeholder="     Enter your weight"
-                      required
                       min={1}
                       className="w-full p-3.5 bg-white border border-white/20 rounded-xl text-white placeholder-white/40 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all group-hover:border-white/30"
                     />
@@ -991,12 +985,8 @@ export default function EmeraldPremiumHealthForm() {
                       value={form.email}
                       onChange={handleChange}
                       placeholder="   you@example.com"
-                      required
                       className="w-full p-3.5 bg-white border border-white/20 rounded-xl text-white placeholder-white/40 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all group-hover:border-white/30"
                     />
-                    <div className="text-xs text-white/40 mt-1 ml-1">
-                      Required — used for updates
-                    </div>
                   </div>
                 </div>
               </section>
@@ -1006,31 +996,22 @@ export default function EmeraldPremiumHealthForm() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                disabled={isSubmitting || !backendReady}
-                className={`relative w-full py-5 rounded-2xl font-bold text-lg transition-all duration-500 shadow-2xl flex items-center justify-center gap-3 overflow-hidden group ${
-                  isSubmitting || !backendReady
-                    ? "bg-white/10 text-white/40 cursor-not-allowed"
-                    : "bg-gradient-to-r from-emerald-500 via-green-500 to-teal-600 text-white hover:shadow-2xl hover:shadow-emerald-500/30"
+                disabled={isSubmitting}
+                className={`w-full py-4 rounded-xl font-semibold text-lg flex items-center justify-center gap-2 transition ${
+                  isSubmitting
+                    ? "bg-gray-500 text-white cursor-not-allowed"
+                    : "bg-gradient-to-r from-emerald-500 to-teal-600 text-white"
                 }`}
               >
-                {!isSubmitting && !backendReady && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 via-green-500/20 to-teal-600/20 animate-pulse" />
-                )}
                 {isSubmitting ? (
-                  <div className="flex items-center gap-3">
-                    <Loader2 className="w-6 h-6 animate-spin" />
-                    <span>Processing Your Assessment...</span>
-                  </div>
-                ) : !backendReady ? (
-                  <div className="flex items-center gap-3">
-                    <Loader2 className="w-6 h-6 animate-spin" />
-                    <span>Establishing Secure Connection...</span>
-                  </div>
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    <span>Processing...</span>
+                  </>
                 ) : (
                   <>
                     <span>Submit</span>
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
-                    <Sparkles className="w-4 h-4 absolute right-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <ArrowRight className="w-5 h-5" />
                   </>
                 )}
               </motion.button>
