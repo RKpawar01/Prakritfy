@@ -152,7 +152,7 @@ export default function App() {
       <NavbarDemo />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-6 overflow-hidden">
+      <section className="relative  pb-20 px-6 overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -481,9 +481,6 @@ export default function App() {
                 </div>
 
                 <div className="flex gap-4">
-                  <div className="flex-1 py-5 bg-brand-primary text-center text-white rounded-2xl font-bold hover:bg-brand-secondary transition-all shadow-xl shadow-brand-primary/20">
-                    Add to Ritual Bag
-                  </div>
                   <button
                     onClick={(e) => toggleWishlist(selectedProduct.id, e)}
                     className="w-16 py-5 border border-brand-primary/10 rounded-2xl flex items-center justify-center hover:bg-brand-primary/5 transition-all"

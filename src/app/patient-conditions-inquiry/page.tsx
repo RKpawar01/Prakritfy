@@ -911,7 +911,7 @@ export default function EmeraldPremiumHealthForm() {
                   {/* Gender */}
                   <div className="space-y-2">
                     <label className="text-sm font-semibold text-white/70 ml-1">
-                      Gender <span className="text-emerald-400">*</span>
+                      Gender
                     </label>
                     <div className="flex gap-4">
                       {["Male", "Female"].map((g) => (
