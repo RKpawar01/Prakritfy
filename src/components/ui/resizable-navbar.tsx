@@ -241,7 +241,7 @@ export const NavbarLogo = () => {
         alt="logo"
         width={130}
       />
-      <span className="text-2xl underline font-bold text-white dark:text-white">Prakritify</span>
+      {/* <span className="text-2xl underline font-bold text-white dark:text-white">Prakritify</span> */}
     </a>
   );
 };
