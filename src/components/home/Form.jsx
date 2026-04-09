@@ -166,8 +166,7 @@ export default function Form({ open, setOpen }) {
             {/* Button */}
             <Button
               type="submit"
-              w="auto"
-              px={12}
+              w="full"
               style={{
                 backgroundColor: "#4FB9A0",
               }}

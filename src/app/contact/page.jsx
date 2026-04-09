@@ -237,7 +237,7 @@ export default function PremiumContactPage() {
       onMouseLeave={(e) => {
         if (!isSubmitting) e.target.style.backgroundColor = "#4FB9A0";
       }}
-      className={`flex items-center gap-2 px-10 py-3 rounded font-bold text-base transition-all shadow-lg text-white ${
+      className={`flex items-center gap-2 px-8 py-4 rounded font-bold text-lg transition-all shadow-lg text-white ${
         isSubmitting ? "cursor-not-allowed" : "hover:shadow-2xl"
       }`}
     >
