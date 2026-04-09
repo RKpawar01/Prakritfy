@@ -89,9 +89,12 @@ function Testimonials() {
   const visibleItems = testimonials.slice(index, index + itemsPerPage);
 
   return (
-    <Box bg="#f8fafc" py={{ base: 16, md: 24 }} position="relative">
-      <Box maxW="1200px" mx="auto" px={{ base: 4, md: 6 }}>
-        {/* HEADER */}
+    <>
+      {false && (
+        <Box bg="#f8fafc" py={{ base: 16, md: 24 }} position="relative">
+          <Box maxW="1200px" mx="auto" px={{ base: 4, md: 6 }}>
+        {/*
+        {/* HEADER *\/}
         <Box textAlign="center" mb={16}>
           <Heading
             color="#00796a"
@@ -122,7 +125,7 @@ function Testimonials() {
           </Text>
         </Box>
 
-        {/* TESTIMONIAL GRID */}
+        {/* TESTIMONIAL GRID *\/}
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
           {visibleItems.map((item) => (
             <Stack
@@ -140,7 +143,7 @@ function Testimonials() {
                 boxShadow: "xl",
               }}
             >
-              {/* Quote icon */}
+              {/* Quote icon *\/}
               <Icon
                 as={FaQuoteLeft}
                 boxSize={10}
@@ -151,7 +154,7 @@ function Testimonials() {
                 opacity={0.3}
               />
 
-              {/* Rating stars */}
+              {/* Rating stars *\/}
               <HStack spacing={1} mb={2}>
                 {[...Array(5)].map((_, idx) => (
                   <Icon
@@ -172,7 +175,7 @@ function Testimonials() {
                 “{item.quote}”
               </Text>
 
-              {/* Improvement badge */}
+              {/* Improvement badge *\/}
               {item.improvement && (
                 <Badge
                   bg="#00796a"
@@ -209,7 +212,7 @@ function Testimonials() {
                 </Box>
               </HStack>
 
-              {/* Decorative line */}
+              {/* Decorative line *\/}
               <Box
                 position="absolute"
                 bottom={0}
@@ -224,7 +227,7 @@ function Testimonials() {
           ))}
         </SimpleGrid>
 
-        {/* BUTTONS */}
+        {/* BUTTONS *\/}
         <Flex justify="center" mt={12} gap={4}>
           <Button
             onClick={prev}
@@ -260,7 +263,7 @@ function Testimonials() {
           </Button>
         </Flex>
 
-        {/* Simple Pagination dots */}
+        {/* Simple Pagination dots *\/}
         <HStack justify="center" mt={8} spacing={2}>
           {Array.from({
             length: Math.ceil(testimonials.length / itemsPerPage),
@@ -279,8 +282,11 @@ function Testimonials() {
             />
           ))}
         </HStack>
-      </Box>
-    </Box>
+        */}
+          </Box>
+        </Box>
+      )}
+    </>
   );
 }
 
