@@ -46,7 +46,7 @@ export function NavbarDemo() {
         <NavBody>
           <NavbarLogo />
           <NavItems items={navItems} className="text-white font-bold text-lg" />
-          <NavbarButton className="text-white" onClick={book} variant="primary">
+          <NavbarButton onClick={book} variant="primary" className="!bg-yellow-400 !text-black">
             Book a Consultant
           </NavbarButton>
         </NavBody>
@@ -82,7 +82,7 @@ export function NavbarDemo() {
             <div className="flex flex-col gap-4 mt-4 hover:bg-white text-black rounded-lg">
               <NavbarButton
                 variant="primary"
-                className="w-full  "
+                className="w-full !bg-yellow-400 !text-black"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   setOpen(true);

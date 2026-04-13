@@ -126,9 +126,9 @@ export default function PremiumContactPage() {
         </div>
 
         {/* FORM */}
-        <div className="bg-white/[0.05] h-[90vh] backdrop-blur-2xl border border-white/10 rounded-2xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
-          <div className="text-3xl font-semibold mb-2 text-gray-900">Book a Consultation</div>
-          <div className="text-gray-600 mb-6">
+        <div className="bg-white/[0.05] backdrop-blur-2xl border border-white/10 rounded-2xl p-8 shadow-[0_20px_60px_rgba(0,0,0,0.6)]">
+          <div className="text-3xl font-semibold mb-2 text-white">Book a Consultation</div>
+          <div className="text-white mb-6">
             Our specialists will contact you shortly.
           </div>
 
@@ -143,21 +143,23 @@ export default function PremiumContactPage() {
   
   {/* Full Name */}
   <div>
-    <label className="flex items-center gap-2 mb-2 font-medium text-gray-900">
+    <label className="flex items-center gap-2 mb-3.5 font-semibold text-white">
       <FaUser /> Full Name
     </label>
     <input
       name="name"
       value={formData.name}
       onChange={handleChange}
+      placeholder="Enter your full name"
       required
-      className="w-full px-5 py-3 bg-white !text-black border border-gray-300 rounded-md placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-cyan-400"
+      className="w-full py-3 bg-white text-black text-base border border-gray-300 rounded-lg placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-200 leading-relaxed min-h-12"
+      style={{ color: '#000000', paddingLeft: '16px', paddingRight: '16px' }}
     />
   </div>
 
   {/* Phone */}
   <div>
-    <label className="flex items-center gap-2 mb-2 font-medium text-gray-900">
+    <label className="flex items-center gap-2 mb-3.5 font-semibold text-white">
       <FaPhone /> Phone Number
     </label>
     <input
@@ -165,9 +167,11 @@ export default function PremiumContactPage() {
       type="tel"
       value={formData.phone}
       onChange={handleChange}
+      placeholder="Enter 10-digit number"
       required
       maxLength={10}
-      className="w-full px-5 py-3 bg-white !text-black border border-gray-300 rounded-md placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-cyan-400"
+      className="w-full py-3 bg-white text-black text-base border border-gray-300 rounded-lg placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-transparent transition-all duration-200 leading-relaxed min-h-12"
+      style={{ color: '#000000', paddingLeft: '16px', paddingRight: '16px' }}
     />
   </div>
 
@@ -176,7 +180,7 @@ export default function PremiumContactPage() {
     
     {/* Date */}
     <div>
-      <label className="flex items-center gap-2 mb-2 font-medium text-gray-900">
+      <label className="flex items-center gap-2 mb-3.5 font-semibold text-white">
         <FaCalendarAlt /> Preferred Date
       </label>
       <input
@@ -185,32 +189,43 @@ export default function PremiumContactPage() {
         value={formData.preferredDate}
         onChange={handleChange}
         min={new Date().toISOString().split("T")[0]}
-        className="w-full px-5 py-3 bg-white !text-black border border-gray-300 rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-cyan-400"
+        className="w-full py-3 bg-white text-black text-base border border-gray-300 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all duration-200 leading-relaxed min-h-12"
+        style={{ 
+          colorScheme: 'light',
+          color: '#000000',
+          paddingLeft: '16px',
+          paddingRight: '16px',
+        }}
       />
     </div>
 
     {/* Time */}
     <div>
-      <label className="flex items-center gap-2 mb-2 font-medium text-gray-900">
+      <label className="flex items-center gap-2 mb-3.5 font-semibold text-white">
         <FaCalendarAlt /> Time
       </label>
       <select
         name="preferredTime"
         value={formData.preferredTime}
         onChange={handleChange}
-        className="w-full px-5 py-3 bg-white !text-black border border-gray-300 rounded-md font-medium focus:outline-none focus:ring-2 focus:ring-cyan-400"
+        className="w-full py-3 bg-white text-black text-base border border-gray-300 rounded-lg font-medium focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all duration-200 leading-relaxed min-h-12 appearance-none cursor-pointer"
+        style={{
+          color: '#000000',
+          paddingLeft: '16px',
+          paddingRight: '16px',
+        }}
       >
-        <option value="" className="!text-black">Select Time</option>
-        <option value="morning" className="!text-black">Morning</option>
-        <option value="afternoon" className="!text-black">Afternoon</option>
-        <option value="evening" className="!text-black">Evening</option>
+        <option value="" label="Select Time Slot" />
+        <option value="morning">Morning 9am to 12pm</option>
+        <option value="afternoon">Afternoon 12pm to 5pm</option>
+        <option value="evening">Evening 5pm to 9pm</option>
       </select>
     </div>
   </div>
 
   {/* Notes */}
   <div>
-    <label className="flex items-center gap-2 mb-2 font-medium text-gray-900">
+    <label className="flex items-center gap-2 mb-3.5 font-semibold text-white">
       <FaPaperPlane /> Additional Notes
     </label>
     <textarea
@@ -218,27 +233,35 @@ export default function PremiumContactPage() {
       value={formData.message}
       onChange={handleChange}
       rows="4"
-      placeholder="Additional notes..."
-      className="w-full px-5 py-3 bg-white !text-black border border-gray-300 rounded-md placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-cyan-400 resize-none"
+      placeholder="Share any additional details about your health condition or concerns..."
+      className="w-full py-3 bg-white text-black text-base border border-gray-300 rounded-lg placeholder-gray-400 font-medium focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all duration-200 leading-relaxed resize-none"
+      style={{ color: '#000000', paddingLeft: '16px', paddingRight: '16px' }}
     />
   </div>
 
   {/* Button */}
-  <div className="flex justify-center">
+  <div className="flex justify-center pt-6">
     <button
       type="submit"
       disabled={isSubmitting}
       style={{
-        backgroundColor: isSubmitting ? "#9CA3AF" : "#4FB9A0",
+        backgroundColor: isSubmitting ? "#D1D5DB" : "#4FB9A0",
+        color: isSubmitting ? "#6B7280" : "white",
       }}
       onMouseEnter={(e) => {
-        if (!isSubmitting) e.target.style.backgroundColor = "#3a9a88";
+        if (!isSubmitting) {
+          e.target.style.backgroundColor = "#FFD700";
+          e.target.style.color = "black";
+        }
       }}
       onMouseLeave={(e) => {
-        if (!isSubmitting) e.target.style.backgroundColor = "#4FB9A0";
+        if (!isSubmitting) {
+          e.target.style.backgroundColor = "#4FB9A0";
+          e.target.style.color = "white";
+        }
       }}
-      className={`flex items-center gap-2 px-8 py-4 rounded font-bold text-lg transition-all shadow-lg text-white ${
-        isSubmitting ? "cursor-not-allowed" : "hover:shadow-2xl"
+      className={`w-60 flex items-center justify-center gap-3 px-0 py-0 rounded-full font-bold text-l transition-all duration-200 shadow-lg hover:shadow-xl min-h-16 ${
+        isSubmitting ? "cursor-not-allowed" : ""
       }`}
     >
       {isSubmitting ? (
@@ -249,7 +272,6 @@ export default function PremiumContactPage() {
       ) : (
         <>
           Book Consultation
-          <FaArrowRight />
         </>
       )}
     </button>

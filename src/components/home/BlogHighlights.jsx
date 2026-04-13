@@ -61,7 +61,14 @@ function BlogHighlights() {
               Rituals, recipes, and research to inspire everyday healing.
             </Heading>
           </Stack>
-          <Button size="lg" variant="outline">
+          <Button 
+            size="lg" 
+            variant="default"
+            bg="teal.500"
+            color="white"
+            rounded="full"
+            _hover={{ bg: "yellow.400", color: "black" }}
+          >
             Explore All Articles
           </Button>
         </Stack>
@@ -104,7 +111,14 @@ function BlogHighlights() {
                 </HStack>
                 <Heading size="md">{post.title}</Heading>
                 <Text color="neutral.600">{post.excerpt}</Text>
-                <Button alignSelf="flex-start" variant="ghost" rightIcon={<span>→</span>}>
+                <Button 
+                  alignSelf="flex-start" 
+                  variant="ghost" 
+                  color="teal.500"
+                  fontWeight="600"
+                  _hover={{ color: "yellow.400" }}
+                  rightIcon={<span>→</span>}
+                >
                   Read Story
                 </Button>
               </Stack>

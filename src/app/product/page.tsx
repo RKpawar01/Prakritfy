@@ -235,10 +235,11 @@ export default function App() {
           <div className="relative flex-1 w-full">
             <input
               type="text"
-              placeholder="     Search Here"
+              placeholder="Search Here"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 bg-brand-primary/5 rounded-xl border-none focus:ring-2 focus:ring-brand-accent/20 outline-none text-brand-primary placeholder:text-brand-primary/30"
+              className="w-full py-3 bg-brand-primary/5 rounded-xl border-none focus:ring-2 focus:ring-brand-accent/20 outline-none text-brand-primary placeholder:text-brand-primary/30"
+              style={{ paddingLeft: '16px', paddingRight: '16px' }}
             />
           </div>
           <div className="flex items-center gap-3 w-full md:w-auto">
@@ -304,7 +305,7 @@ export default function App() {
                       />
                     </button>
                     <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500">
-                      <div className="w-full py-4 bg-brand-primary text-white rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl">
+                      <div className="w-full py-4 bg-teal-500 text-white rounded-full font-bold flex items-center justify-center gap-2 shadow-xl hover:bg-yellow-400 hover:text-black transition-all">
                         <Plus size={20} />
                         Quick Add
                       </div>

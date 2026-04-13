@@ -60,11 +60,11 @@ function CallToAction() {
               <Button
                 size="lg"
                 rounded="full"
-                bg="white"
-                color="#2F5F55"
+                bg="teal.500"
+                color="white"
                 fontWeight="600"
                 px={10}
-                _hover={{ bg: "#71d2ba", color: "black" }}
+                _hover={{ bg: "yellow.400", color: "black" }}
                 onClick={() => setOpen(true)}
               >
                 Book Consultation

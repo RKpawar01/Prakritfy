@@ -94,14 +94,14 @@ export default function Footer() {
                     aria-label={social.label}
                     size="sm"
                     rounded="full"
-                    bg="whiteAlpha.100"
+                    bg="teal.500"
                     color="white"
                     backdropFilter="blur(6px)"
                     _hover={{
-                      bg: "#7CBF9E",
-                      color: "#0F3D2E",
+                      bg: "yellow.400",
+                      color: "black",
                       transform: "translateY(-3px)",
-                      boxShadow: "0 10px 25px rgba(124,191,158,0.6)",
+                      boxShadow: "0 10px 25px rgba(255,215,0,0.6)",
                     }}
                   >
                     {social.icon}
@@ -174,13 +174,15 @@ export default function Footer() {
               <Stack spacing={4}>
                 <Button
                   rounded="full"
-                  bgGradient="linear(to-r, #7CBF9E, #548F9D)"
-                  color="#0F3D2E"
+                  bg="teal.500"
+                  color="white"
                   fontWeight="700"
                   letterSpacing="wide"
                   _hover={{
+                    bg: "yellow.400",
+                    color: "black",
                     transform: "translateY(-2px)",
-                    boxShadow: "0 15px 40px rgba(124,191,158,0.6)",
+                    boxShadow: "0 15px 40px rgba(255,215,0,0.6)",
                   }}
                   onClick={() => setOpen(true)}
                 >

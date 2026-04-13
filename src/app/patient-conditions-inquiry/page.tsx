@@ -32,6 +32,8 @@ import {
 } from "lucide-react";
 import Footer from "@/components/Universal/Footer";
 import { NavbarDemo } from "@/components/Universal/NavbarDemo";
+import { db } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 // Use Render production API only
 const BASE_URL = "https://nutribot-backend-9e3a.onrender.com";
@@ -425,24 +427,68 @@ export default function EmeraldPremiumHealthForm() {
         JSON.stringify(payload, null, 2),
       );
 
-      const res = await fetch(`${BASE_URL}/api/questionnaire/create`, {
+      // Prepare Firebase data
+      const firebaseData = {
+        name: form.name.trim(),
+        phone: form.phone.trim(),
+        email: form.email?.trim() || null,
+        age: form.age ? Number(form.age) : null,
+        gender: form.gender || null,
+        height: form.height || null,
+        weight: form.weight ? parseFloat(form.weight) : null,
+        selectedConditions: form.diseases,
+        conditionDetails: form.conditionDetails,
+        submittedAt: serverTimestamp(),
+        status: "pending"
+      };
+
+      // Send to Firebase
+      console.log("📤 Sending to Firebase...");
+      const firebasePromise = addDoc(collection(db, "patientInquiries"), firebaseData);
+
+      // Send to MongoDB backend
+      const backendPromise = fetch(`${BASE_URL}/api/questionnaire/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
-      const data = await res.json();
+      // Wait for both to complete
+      const [firebaseResult, res] = await Promise.allSettled([firebasePromise, backendPromise]);
 
-      console.log("📥 Response from backend:", data);
+      console.log("✅ Firebase Result:", firebaseResult);
+      console.log("✅ Backend Result:", res);
 
-      if (!res.ok) {
-        const detail = Array.isArray(data?.details)
-          ? data.details.join("\n")
-          : (data?.error ?? data?.message ?? "Submission failed. Please check your information and try again.");
-        throw new Error(detail);
+      // Check Firebase result
+      if (firebaseResult.status === "fulfilled") {
+        console.log("✨ Data saved to Firebase with ID:", firebaseResult.value.id);
+      } else {
+        console.warn("⚠️ Firebase save failed:", firebaseResult.reason);
       }
 
-      showToast("✨ Assessment submitted successfully!", "success");
+      // Check Backend result
+      if (res.status === "fulfilled") {
+        const backendRes = res.value;
+        const data = await backendRes.json();
+
+        console.log("📥 Response from backend:", data);
+
+        if (!backendRes.ok) {
+          const detail = Array.isArray(data?.details)
+            ? data.details.join("\n")
+            : (data?.error ?? data?.message ?? "Backend submission had issues, but Firebase save completed.");
+          console.warn("⚠️ Backend warning:", detail);
+        }
+      } else {
+        console.warn("⚠️ Backend request failed:", res.reason);
+      }
+
+      // Show success if either Firebase or Backend succeeded
+      if (firebaseResult.status === "fulfilled" || res.status === "fulfilled") {
+        showToast("✨ Assessment submitted successfully!", "success");
+      } else {
+        throw new Error("Failed to submit to both services");
+      }
 
       setForm({
         diseases: [],
@@ -787,7 +833,8 @@ export default function EmeraldPremiumHealthForm() {
                                         e.target.value,
                                       )
                                     }
-                                    className="w-full px-5 py-3 bg-white text-gray-900 border border-gray-300 rounded text-base focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all appearance-none font-medium"
+                                    className="w-full py-10 bg-white text-gray-900 border border-gray-300 rounded text-base focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all appearance-none font-medium"
+                                    style={{ paddingLeft: '16px', paddingRight: '16px', minHeight: '55px' }}
                                   >
                                     <option value="" className="bg-white text-gray-900">
                                       Select option
@@ -809,7 +856,7 @@ export default function EmeraldPremiumHealthForm() {
                                   {q.options?.map((opt: string) => (
                                     <label
                                       key={opt}
-                                      className={`flex items-center gap-2 px-4 py-2 rounded-xl border-2 cursor-pointer transition-all ${
+                                      className={`flex items-center gap-2 px-4 py-4 rounded-xl border-2 cursor-pointer transition-all ${
                                         form.conditionDetails[disease]?.[
                                           q.id
                                         ] === opt
@@ -855,7 +902,8 @@ export default function EmeraldPremiumHealthForm() {
                                     )
                                   }
                                   placeholder={q.placeholder}
-                                  className="w-full px-5 py-3 bg-white text-gray-900 border border-gray-300 rounded text-base placeholder-gray-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all font-medium"
+                                  className="w-full py-10 bg-white text-gray-900 border border-gray-300 rounded text-base placeholder-gray-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all font-medium"
+                                  style={{ paddingLeft: '16px', paddingRight: '16px', minHeight: '55px' }}
                                 />
                               )}
                             </div>
@@ -893,7 +941,8 @@ export default function EmeraldPremiumHealthForm() {
                       onChange={handleChange}
                       placeholder="Enter your full name"
                       required
-                      className="w-full px-5 py-3 bg-white text-gray-900 border border-gray-300 rounded text-base placeholder-gray-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all font-medium"
+                      className="w-full py-10 bg-white text-gray-900 border border-gray-300 rounded text-base placeholder-gray-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all font-medium"
+                      style={{ paddingLeft: '16px', paddingRight: '16px', minHeight: '55px' }}
                     />
                   </div>
 
@@ -910,7 +959,8 @@ export default function EmeraldPremiumHealthForm() {
                       placeholder="Enter your age"
                       min={1}
                       max={120}
-                      className="w-full px-5 py-3 bg-white text-gray-900 border border-gray-300 rounded text-base placeholder-gray-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all font-medium"
+                      className="w-full py-10 bg-white text-gray-900 border border-gray-300 rounded text-base placeholder-gray-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all font-medium"
+                      style={{ paddingLeft: '16px', paddingRight: '16px', minHeight: '55px' }}
                     />
                   </div>
 
@@ -923,7 +973,7 @@ export default function EmeraldPremiumHealthForm() {
                       {["Male", "Female"].map((g) => (
                         <label
                           key={g}
-                          className={`flex-1 flex items-center justify-center gap-2 p-3.5 rounded-xl border-2 cursor-pointer transition-all ${
+                          className={`flex-1 flex items-center justify-center gap-2 p-5 rounded-xl border-2 cursor-pointer transition-all ${
                             form.gender === g
                               ? "border-emerald-400 bg-emerald-500 text-emerald-300 shadow-lg"
                               : "border-white/20 bg-white/5 text-white/60 hover:border-emerald-400/50 hover:bg-white/10"
@@ -955,7 +1005,8 @@ export default function EmeraldPremiumHealthForm() {
                       onChange={handleChange}
                       placeholder="Enter your weight"
                       min={1}
-                      className="w-full px-5 py-3 bg-white text-gray-900 border border-gray-300 rounded text-base placeholder-gray-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all font-medium"
+                      className="w-full py-10 bg-white text-gray-900 border border-gray-300 rounded text-base placeholder-gray-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all font-medium"
+                      style={{ paddingLeft: '16px', paddingRight: '16px', minHeight: '55px' }}
                     />
                   </div>
 
@@ -970,7 +1021,8 @@ export default function EmeraldPremiumHealthForm() {
                       value={form.height}
                       onChange={handleChange}
                       placeholder="Enter height or 'n'"
-                      className="w-full px-5 py-3 bg-white text-gray-900 border border-gray-300 rounded text-base placeholder-gray-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all font-medium"
+                      className="w-full py-12 bg-white text-gray-900 border border-gray-300 rounded text-base placeholder-gray-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all font-medium"
+                      style={{ paddingLeft: '16px', paddingRight: '16px', minHeight: '60px' }}
                     />
                     <div className="text-xs text-white/40 mt-1 ml-1">
                       Enter 'n' if not known
@@ -991,7 +1043,8 @@ export default function EmeraldPremiumHealthForm() {
                       placeholder="e.g. 9230012345"
                       required
                       maxLength={10}
-                      className="w-full px-5 py-3 bg-white text-gray-900 border border-gray-300 rounded text-base placeholder-gray-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all font-medium"
+                      className="w-full py-12 bg-white text-gray-900 border border-gray-300 rounded text-base placeholder-gray-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all font-medium"
+                      style={{ paddingLeft: '16px', paddingRight: '16px', minHeight: '60px' }}
                     />
                   </div>
 
@@ -1007,7 +1060,8 @@ export default function EmeraldPremiumHealthForm() {
                       value={form.email}
                       onChange={handleChange}
                       placeholder="you@example.com"
-                      className="w-full px-5 py-3 bg-white text-gray-900 border border-gray-300 rounded text-base placeholder-gray-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all font-medium"
+                      className="w-full py-12 bg-white text-gray-900 border border-gray-300 rounded text-base placeholder-gray-400 focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/50 transition-all font-medium"
+                      style={{ paddingLeft: '16px', paddingRight: '16px', minHeight: '60px' }}
                     />
                   </div>
                 </div>
@@ -1022,27 +1076,35 @@ export default function EmeraldPremiumHealthForm() {
                   disabled={isSubmitting}
                   style={{
                     backgroundColor: isSubmitting ? "#D1D5DB" : "#4FB9A0",
+                    color: isSubmitting ? "#9CA3AF" : "white",
+                    padding: "20px 80px",
+                    fontSize: "18px",
+                    borderRadius: "50px",
+                    fontWeight: "bold",
                   }}
                   onMouseEnter={(e) => {
-                    if (!isSubmitting) (e.target as HTMLButtonElement).style.backgroundColor = "#3a9a88";
+                    if (!isSubmitting) {
+                      (e.target as HTMLButtonElement).style.backgroundColor = "#FFD700";
+                      (e.target as HTMLButtonElement).style.color = "black";
+                    }
                   }}
                   onMouseLeave={(e) => {
-                    if (!isSubmitting) (e.target as HTMLButtonElement).style.backgroundColor = "#4FB9A0";
+                    if (!isSubmitting) {
+                      (e.target as HTMLButtonElement).style.backgroundColor = "#4FB9A0";
+                      (e.target as HTMLButtonElement).style.color = "white";
+                    }
                   }}
-                  className={`px-12 py-3 rounded font-bold text-base flex items-center justify-center gap-2 transition-all duration-300 shadow-lg text-white ${
+                  className={`flex items-center justify-center gap-2 transition-all duration-300 shadow-lg ${
                     isSubmitting ? "cursor-not-allowed" : "hover:shadow-2xl"
                   }`}
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <Loader2 className="w-5 h-5 animate-spin" />
                     <span>Processing</span>
                   </>
                 ) : (
-                  <>
-                    <span>Submit</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </>
+                  <span>Submit</span>
                 )}
               </motion.button>
               </div>

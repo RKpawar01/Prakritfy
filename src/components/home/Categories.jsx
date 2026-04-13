@@ -30,19 +30,19 @@ const productCategories = [
       "Stabilize blood pressure, improve circulation, and ease stress responses with adaptogenic formulations.",
   },
   {
-    img: "Heart.jpg",
+    img: "heart image.png",
     title: "Heart Health",
     description:
       "Strengthen cardiac function, optimize lipids, and protect vascular integrity with cardiotonic herbs.",
   },
   {
-    img: "Liver.jpg",
+    img: "liver image.png",
     title: "Liver",
     description:
       "Detoxify, regenerate, and elevate liver performance with antioxidant-rich herbs and nutraceuticals.",
   },
   {
-    img: "Bone.png",
+    img: "bones img.webp",
     title: " Bone/Joint/Nerve Health",
     description:
       "Support bone strength, improve joint flexibility, and promote nerve health for better mobility and overall wellness.",
